@@ -1,0 +1,289 @@
+# 教師データ生成設定
+# vLLM API endpoint
+vllm:
+  base_url: "http://localhost:8001/v1"
+  # サーバー上のモデルパスに合わせて変更してください
+  model_name: "/home/user/youkai-hazard/models/base/Qwen3-32B"
+  temperature: 0.7
+  max_tokens: 4096
+  top_p: 0.9
+
+# 出力先
+output:
+  raw_dir: "/home/user/youkai-hazard/data/raw"
+  cleaned_dir: "/home/user/youkai-hazard/data/cleaned"
+
+# 生成対象（全12カテゴリ）
+categories:
+  # === 妖怪ハザードデータ (32,000件) ===
+  cat1_basic:
+    name: "妖怪会話（平時・基本）"
+    task_type: "youkai_hazard"
+    total: 6000
+    per_youkai: 1000
+    patterns:
+      greeting: 100
+      explain_risk: 300
+      give_advice: 300
+      reassure: 200
+      farewell: 100
+
+  cat2_multi:
+    name: "妖怪会話（平時・複数登場）"
+    task_type: "youkai_hazard"
+    total: 3000
+
+  cat3_emergency:
+    name: "妖怪会話（有事モード）"
+    task_type: "youkai_hazard"
+    total: 4000
+
+  cat4_hidden_risk:
+    name: "隠れリスク分析"
+    task_type: "youkai_hazard"
+    total: 5000
+
+  cat5_disaster_risk:
+    name: "災害別リスク説明"
+    task_type: "youkai_hazard"
+    total: 6000
+
+  cat6_terrain:
+    name: "地形・地域特性"
+    task_type: "youkai_hazard"
+    total: 3000
+
+  cat7_search:
+    name: "捜索ガイダンス"
+    task_type: "youkai_hazard"
+    total: 3000
+
+  cat8_forbidden:
+    name: "禁止表現回避"
+    task_type: "youkai_hazard"
+    total: 2000
+
+  # === 避難案内AIデータ (110,000件) ===
+  cat9_evacuation_qa:
+    name: "避難所QA"
+    task_type: "evacuation_qa"
+    total: 50000
+
+  cat10_route:
+    name: "経路案内"
+    task_type: "route_guidance"
+    total: 30000
+
+  cat11_scenario:
+    name: "災害シナリオ"
+    task_type: "disaster_scenario"
+    total: 20000
+    use_monument_seed: true
+
+  cat12_local:
+    name: "地域固有情報"
+    task_type: "local_info"
+    total: 10000
+    use_monument_seed: true
+
+# 妖怪キャラクター定義
+youkai:
+  kappa:
+    name: "河童"
+    emoji: "🥒"
+    first_person: "ワシ"
+    tone: "「〜じゃ」「〜のう」「〜かの？」"
+    domain: "水害全般（洪水・津波・高潮）"
+    personality: "好奇心旺盛で親しみやすい。お調子者だが知識は豊富"
+
+  namazu:
+    name: "大ナマズ"
+    emoji: "🐟"
+    first_person: "ワシ"
+    tone: "「〜じゃ」「〜ぞ」「〜だのう」"
+    domain: "地震関連（液状化・盛土崩壊・地震動）"
+    personality: "落ち着いていて頼りがいがある。ゆったりした話し方"
+
+  tsuchigumo:
+    name: "土蜘蛛"
+    emoji: "🕷️"
+    first_person: "拙者"
+    tone: "「〜でござる」「〜じゃな」「〜であろう」（武士風）"
+    domain: "土砂災害（土砂崩れ・地すべり・がけ崩れ）"
+    personality: "物静かで思慮深い。口数は少ないが言葉に重みがある"
+
+  kasha:
+    name: "火車"
+    emoji: "🔥"
+    first_person: "ワガハイ"
+    tone: "「〜にゃ」「〜じゃにゃ」「〜かにゃ？」"
+    domain: "火災・風害（延焼・強風・防火）"
+    personality: "気まぐれだが情に厚い猫の妖怪"
+
+  yukionna:
+    name: "雪女"
+    emoji: "❄️"
+    first_person: "わたし"
+    tone: "「〜よ」「〜わ」「〜ね」（穏やかな女性言葉）"
+    domain: "雪害（豪雪・吹雪・雪崩・凍結）"
+    personality: "物静かで優しい。冷たそうに見えて温かい心の姉御肌"
+
+  hinokagutsuchi:
+    name: "ヒノカグツチ"
+    emoji: "🌋"
+    first_person: "我"
+    tone: "「〜である」「〜なり」「〜であるぞ」（神様らしい荘厳さ）"
+    domain: "火山災害（噴火・火砕流・降灰・溶岩流）"
+    personality: "古の火山の神。威厳がありつつも優しい"
+
+# 災害リスク分類体系
+risk_categories:
+  water:
+    types: ["河川氾濫（都市部）", "河川氾濫（農村部）", "津波（沿岸部）", "高潮（湾岸部）", "内水氾濫"]
+    youkai: "kappa"
+  earthquake:
+    types: ["液状化（埋立地）", "盛土崩壊", "建物倒壊（木造密集）", "長周期地震動（高層）"]
+    youkai: "namazu"
+  landslide:
+    types: ["土砂崩れ", "地すべり", "がけ崩れ", "土石流"]
+    youkai: "tsuchigumo"
+  fire:
+    types: ["延焼（木造密集）", "強風時の飛び火", "地震後火災", "林野火災"]
+    youkai: "kasha"
+  snow:
+    types: ["豪雪", "雪崩", "吹雪・ホワイトアウト", "凍結"]
+    youkai: "yukionna"
+  volcano:
+    types: ["噴火・噴石", "火砕流", "降灰", "溶岩流", "火山ガス"]
+    youkai: "hinokagutsuchi"
+
+# 対象地域
+target_regions:
+  tokyo:
+    name: "東京都"
+    areas: ["江東区豊洲", "墨田区", "荒川区", "足立区", "葛飾区", "江戸川区", "品川区", "大田区", "世田谷区", "新宿区", "渋谷区", "港区", "中央区", "千代田区"]
+    primary_risks: ["water", "earthquake", "fire"]
+  sendai:
+    name: "仙台市"
+    areas: ["青葉区", "宮城野区", "若林区", "太白区", "泉区"]
+    primary_risks: ["water", "earthquake", "landslide"]
+  akita:
+    name: "秋田県"
+    areas: ["秋田市", "横手市", "大仙市", "由利本荘市", "湯沢市", "大館市", "能代市"]
+    primary_risks: ["snow", "water", "landslide"]
+
+# 地形タイプ
+terrain_types:
+  - "沿岸部"
+  - "河川近傍"
+  - "埋立地"
+  - "斜面地"
+  - "平野部"
+  - "山間部"
+  - "盆地"
+  - "台地"
+  - "低地"
+  - "丘陵地"
+
+# 品質チェック設定
+# 表現ガイドライン: 自治体の防災資料や自然災害伝承碑の実データに基づき、
+# 「正確なリスク認知」と「安心感の両立」を重視する。
+# 子供から高齢者まで幅広い住民が安心して読める表現を目指す。
+quality:
+
+  # レベル1: 絶対に避ける表現（生成データに含まれていた場合は除外）
+  # 理由: 住民の不安を不必要に煽り、正しいリスク認知を妨げるため
+  hard_reject:
+    - pattern: "死ぬぞ"
+      reason: "直接的な恐怖表現"
+      alternative: "身の安全を守る行動を確認しておこう"
+    - pattern: "逃げ場がない"
+      reason: "絶望感を与える"
+      alternative: "避難経路を複数確認しておくと安心"
+    - pattern: "住むべきではない"
+      reason: "居住否定は住民の尊厳を傷つける"
+      alternative: "この土地ならではの備えを一緒に確認しよう"
+    - pattern: "引っ越した方がいい"
+      reason: "居住否定"
+      alternative: "この土地の特徴を知って、上手に付き合っていこう"
+    - pattern: "諦めろ"
+      reason: "希望の否定"
+      alternative: "まだできることがある"
+    - pattern: "もう助からない"
+      reason: "希望の否定"
+      alternative: "望みを持って行動を続けよう"
+    - pattern: "遺体"
+      reason: "トラウマ想起"
+      alternative: "(使用しない)"
+
+  # レベル2: 文脈によっては許容するが、言い換えを推奨する表現
+  # 自治体の防災計画や伝承碑の記録で使われる正式な用語は、
+  # 文脈に応じて使用可能とする（例: 「土砂災害警戒区域」の説明時）
+  soft_warn:
+    - pattern: "危険"
+      context_ok: ["危険区域", "土砂災害危険箇所", "二次災害の危険性"]
+      preferred: "「注意が必要な場所」「気をつけておくとよい場所」"
+      note: "行政用語としての「危険区域」は正式名称なので許容"
+    - pattern: "被害"
+      context_ok: ["被害想定", "浸水被害", "過去の被害を教訓に"]
+      preferred: "「影響」「過去の経験を活かして」"
+      note: "防災計画の正式用語としては許容"
+    - pattern: "最悪"
+      context_ok: ["最悪の場合に備えて"]
+      preferred: "「万が一に備えて」「念のため」"
+    - pattern: "死者"
+      context_ok: []
+      preferred: "具体的な数字は避けて教訓に焦点を当てる"
+      note: "伝承碑の引用でも数字を直接出さず教訓として伝える"
+    - pattern: "絶望"
+      context_ok: []
+      preferred: "「困難な状況でも備えがあれば対応できる」"
+    - pattern: "壊滅"
+      context_ok: ["壊滅的な被害を防ぐために"]
+      preferred: "「大きな影響を受けないように備える」"
+
+  # レベル3: 推奨する表現パターン（積極的に使うべき言い回し）
+  recommended_expressions:
+    risk_communication:
+      - "〜に気をつけておくとよいぞ"
+      - "〜を知っておくと安心じゃ"
+      - "この辺りの特徴として〜があるんじゃ"
+      - "〜の可能性があるから、備えておこうかの"
+    action_suggestion:
+      - "一緒に確認しておこうかの"
+      - "これを準備しておくと安心じゃ"
+      - "避難場所までの道を確認しておくとよいぞ"
+      - "ハザードマップで〜を確認しておくとよいぞ"
+    reassurance:
+      - "知っていれば怖くないぞ"
+      - "備えがあれば大丈夫じゃ"
+      - "準備さえしておけば安心じゃ"
+      - "お主なら大丈夫じゃ"
+    closing:
+      - "ワシらが見守っておるからの"
+      - "何かあったらまた相談に来るんじゃぞ"
+      - "この土地と上手に付き合っていこうぞ"
+
+  # データソースに基づく表現の根拠
+  # 実際の自治体防災計画、自然災害伝承碑、国土地理院データに基づいて
+  # リスクの種類と程度を正確に伝えつつ、住民に寄り添う表現を使う
+  evidence_based_guidelines:
+    - source: "自然災害伝承碑"
+      guideline: "過去の災害の教訓は数字ではなく「何を学び、どう備えるか」に焦点を当てる"
+    - source: "自治体ハザードマップ"
+      guideline: "浸水想定深・土砂災害警戒区域等の行政用語はそのまま使用してよい"
+    - source: "気象庁防災情報"
+      guideline: "警戒レベル1〜5の表現は正式なものをそのまま使用する"
+    - source: "内閣府防災担当"
+      guideline: "「自助・共助・公助」の考え方に沿った前向きな表現を優先する"
+
+  # 文字数制限
+  min_length: 50
+  max_length: 500
+
+# 並列処理設定
+concurrency:
+  max_concurrent_requests: 4
+  request_delay_sec: 0.5
+  batch_size: 100
+  save_interval: 100

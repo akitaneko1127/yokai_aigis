@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Environment / Secrets
+.env
+.env.*
+!.env.example
+不動産API.txt
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+frontend/dist/
+frontend/install.log
+
+# Logs
+*.log
+logs/
+
+# Temporary / Test files
+temp*.json
+test_response*.json
+nul
+
+# Misc artifacts
+-Force/
+youkai-hazard_*_*.txt
+
+# AI Models (too large for git)
+*.gguf
+*.safetensors
+*.bin
+*.pt
+*.onnx
+
+# VOICEVOX engine (downloaded by scripts/setup-voicevox.ps1)
+VOICEVOX/

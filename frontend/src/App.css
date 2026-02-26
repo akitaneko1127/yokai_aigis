@@ -1,0 +1,2909 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ヘッダー */
+.header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.header-emoji {
+  font-size: 36px;
+}
+
+.subtitle {
+  margin-top: 8px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* メインコンテンツ */
+.main {
+  flex: 1;
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* セクション共通 */
+section {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.section-header h2 {
+  font-size: 18px;
+  color: #333;
+}
+
+.location-info {
+  font-size: 12px;
+  color: #666;
+  background: #f0f0f0;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+/* ローディング */
+.loading-section {
+  text-align: center;
+}
+
+/* 地図コンテナラッパー */
+.map-container-wrapper {
+  position: relative;
+}
+
+/* ローディングモーダル（フルスクリーンポップアップ） */
+.loading-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: loading-modal-fadein 0.3s ease-out;
+  padding: 16px;
+}
+
+.loading-modal {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 520px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 24px;
+  animation: loading-modal-slidein 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes loading-modal-fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes loading-modal-slidein {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* エラー */
+.error-section {
+  text-align: center;
+}
+
+.error-message {
+  color: #d32f2f;
+  padding: 16px;
+  background: #ffebee;
+  border-radius: 8px;
+}
+
+/* イントロ */
+.intro-section {
+  text-align: center;
+}
+
+.intro-content {
+  padding: 24px;
+}
+
+.youkai-intro {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.youkai-intro-img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  animation: bounce 2s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+.youkai-intro-img:nth-child(2) { animation-delay: 0.1s; }
+.youkai-intro-img:nth-child(3) { animation-delay: 0.2s; }
+.youkai-intro-img:nth-child(4) { animation-delay: 0.3s; }
+.youkai-intro-img:nth-child(5) { animation-delay: 0.4s; }
+.youkai-intro-img:nth-child(6) { animation-delay: 0.5s; }
+.youkai-intro-img:nth-child(7) { animation-delay: 0.6s; }
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.intro-content h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.intro-content p {
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.youkai-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.youkai-item {
+  background: #f5f5f5;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.youkai-item-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* 隠れリスクセクション */
+.hidden-risk-section {
+  background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+  border: 2px solid #ffc107;
+}
+
+.hidden-risk-display {
+  padding: 8px;
+}
+
+/* 結果セクション */
+.result-section,
+.conversation-section,
+.action-section,
+.hidden-risk-section {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* リスクスコアカード */
+.risk-score-card .risks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.risk-score-card .risk-item {
+  padding: 12px 16px;
+  border-radius: 10px;
+  transition: transform 0.2s, box-shadow 0.2s, all 0.3s ease;
+}
+
+.risk-score-card .risk-item.expanded {
+  grid-column: 1 / -1;
+}
+
+.risk-score-card .risk-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.risk-item-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.risk-item-summary {
+  text-align: center;
+  min-width: 80px;
+}
+
+.risk-emoji {
+  margin-bottom: 4px;
+}
+
+.risk-emoji-text {
+  font-size: 28px;
+}
+
+.risk-name {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.risk-level {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.risk-score {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.risk-item-details {
+  flex: 1;
+  border-left: 2px solid #999;
+  padding-left: 16px;
+  text-align: left;
+}
+
+.risk-item-details-title {
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.risk-item-details-list {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.risk-item-hint {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #888;
+  text-align: center;
+}
+
+/* アクションリスト */
+.action-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.action-list li {
+  transition: background-color 0.2s;
+}
+
+.action-list li:hover {
+  background-color: #e9ecef;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* フッター */
+.footer {
+  background: #333;
+  color: #999;
+  padding: 16px;
+  text-align: center;
+  font-size: 12px;
+}
+
+/* マップコンテナ */
+.map-container {
+  touch-action: pan-x pan-y;
+}
+
+/* 地図比較コンポーネント */
+.map-compare-wrapper {
+  width: 100%;
+}
+
+.map-compare-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.compare-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 12px;
+  background: #f0f0f0;
+  border-radius: 20px;
+}
+
+.compare-toggle input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.clear-selection-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.clear-selection-btn:hover {
+  background: #ee5a5a;
+}
+
+.layer-selectors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.layer-select {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.layer-label {
+  font-size: 12px;
+  color: #666;
+  white-space: nowrap;
+}
+
+.layer-select select {
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 13px;
+  background: white;
+  cursor: pointer;
+}
+
+.map-compare-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* 左右のマップレイヤー */
+.map-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.map-left {
+  z-index: 1;
+}
+
+.map-right {
+  z-index: 2;
+  pointer-events: none; /* 右マップはクリック透過 */
+}
+
+/* スライダー */
+.compare-slider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  transform: translateX(-50%);
+  z-index: 1000;
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.slider-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background: white;
+  transform: translateX(-50%);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.slider-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+
+.slider-arrows {
+  display: flex;
+  gap: 4px;
+  color: #667eea;
+  font-size: 14px;
+  font-weight: bold;
+  user-select: none;
+}
+
+/* レイヤーインジケーター */
+.layer-indicator {
+  position: absolute;
+  bottom: 40px;
+  padding: 4px 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 11px;
+  border-radius: 4px;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.layer-indicator.left {
+  left: 10px;
+}
+
+.layer-indicator.right {
+  right: 10px;
+}
+
+.map-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+
+/* タイルエラー警告 */
+.tile-error-alert {
+  padding: 10px 16px;
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  color: #856404;
+  font-size: 13px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* 違う場所を調べるボタン */
+.search-another-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.search-another-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.search-another-btn:active {
+  transform: translateY(0);
+}
+
+/* クリックモード表示 */
+.click-mode-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 30px;
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  animation: pulse-glow 2s ease-in-out infinite;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.click-mode-indicator.active {
+  background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+  animation: none;
+}
+
+.click-mode-indicator.clickable {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.click-mode-indicator.clickable:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.click-mode-indicator.selection-mode {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+  box-shadow: 0 4px 15px rgba(255, 152, 0, 0.5);
+  animation: pulse-selection 1s ease-in-out infinite;
+}
+
+@keyframes pulse-selection {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(255, 152, 0, 0.8);
+  }
+}
+
+.click-icon.pulse {
+  animation: pulse-icon 0.8s ease-in-out infinite;
+}
+
+@keyframes pulse-icon {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(102, 126, 234, 0.6);
+  }
+}
+
+.click-icon {
+  font-size: 20px;
+  animation: point-down 1s ease-in-out infinite;
+}
+
+@keyframes point-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* 妖怪登場アニメーション */
+.youkai-appearance {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: appearance-fade-in 0.3s ease-out;
+}
+
+.youkai-appearance.fade-out {
+  animation: appearance-fade-out 0.5s ease-out forwards;
+}
+
+@keyframes appearance-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes appearance-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.appearance-content {
+  text-align: center;
+  color: white;
+}
+
+.appearance-title {
+  font-size: 18px;
+  margin-bottom: 24px;
+  opacity: 0.9;
+}
+
+.appearance-youkai-row {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+.appearance-youkai {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(30px) scale(0.5);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.appearance-youkai.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.appearance-emoji {
+  font-size: 64px;
+  filter: drop-shadow(0 4px 20px rgba(255, 255, 255, 0.3));
+}
+
+.appearance-youkai-img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 20px rgba(255, 255, 255, 0.3));
+}
+
+.appearance-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.appearance-message {
+  font-size: 20px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease-out;
+  color: #ffd700;
+  text-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
+}
+
+.appearance-message.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Leafletレイヤーコントロール */
+.leaflet-control-layers {
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.leaflet-control-layers-expanded {
+  padding: 8px 12px !important;
+}
+
+.leaflet-control-layers-base label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.leaflet-control-layers-selector {
+  margin-right: 4px;
+}
+
+/* リスクカード妖怪イラスト */
+.risk-youkai-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+/* 会話妖怪イラスト */
+.conversation-youkai-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ========================================
+   ゆっくり劇場風 会話ポップアップ
+   ======================================== */
+
+/* 開くボタン */
+.youkai-theater-open-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  border: 2px solid #81c784;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.youkai-theater-open-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(129, 199, 132, 0.3);
+}
+
+.youkai-theater-open-chars {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.youkai-theater-open-char-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.youkai-theater-open-char-emoji {
+  font-size: 28px;
+}
+
+.youkai-theater-open-text {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2e7d32;
+  text-align: left;
+}
+
+.youkai-theater-open-arrow {
+  font-size: 18px;
+  color: #4caf50;
+}
+
+/* オーバーレイ */
+.youkai-theater-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: appearance-fade-in 0.3s ease-out;
+}
+
+/* 劇場コンテナ */
+.youkai-theater {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  height: 100%;
+  max-height: 520px;
+  display: flex;
+  flex-direction: column;
+  margin: 16px;
+}
+
+/* 閉じるボタン */
+.youkai-theater-close {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.youkai-theater-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ステージ */
+.youkai-theater-stage {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 20px 16px 0;
+  min-height: 0;
+}
+
+/* 左右のキャラクター群 */
+.youkai-theater-side {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.youkai-theater-side.right {
+  flex-direction: row-reverse;
+}
+
+/* キャラクター */
+.youkai-theater-character {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.3s ease;
+}
+
+.youkai-theater-character.speaking {
+  transform: scale(1.1) translateY(-8px);
+  filter: none;
+}
+
+.youkai-theater-character.silent {
+  transform: scale(0.85);
+  filter: brightness(0.5) grayscale(0.3);
+  opacity: 0.7;
+}
+
+.youkai-theater-char-img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+}
+
+.youkai-theater-char-emoji {
+  font-size: 64px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+}
+
+.youkai-theater-character.speaking .youkai-theater-char-img,
+.youkai-theater-character.speaking .youkai-theater-char-emoji {
+  animation: theater-bounce 0.6s ease-out;
+}
+
+@keyframes theater-bounce {
+  0% { transform: scale(0.9); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.youkai-theater-char-name {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.youkai-theater-character.speaking .youkai-theater-char-name {
+  color: white;
+  font-weight: bold;
+}
+
+/* テキストボックス */
+.youkai-theater-textbox {
+  background: linear-gradient(180deg, rgba(20, 20, 50, 0.95) 0%, rgba(10, 10, 30, 0.98) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin: 12px 0 0;
+  cursor: pointer;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+}
+
+.youkai-theater-textbox.left {
+  border-left: 4px solid #4caf50;
+}
+
+.youkai-theater-textbox.right {
+  border-right: 4px solid #42a5f5;
+  text-align: left;
+}
+
+/* 話者名 */
+.youkai-theater-speaker {
+  margin-bottom: 10px;
+}
+
+.youkai-theater-speaker-name {
+  display: inline-block;
+  padding: 3px 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* テキスト */
+.youkai-theater-text {
+  flex: 1;
+  font-size: 15px;
+  line-height: 1.9;
+  color: #eee;
+  word-break: break-word;
+}
+
+.youkai-theater-cursor {
+  animation: blink 0.6s infinite;
+  color: #ffd700;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* タグ付きメッセージ（避難場所・伝承碑） */
+.youkai-theater-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.youkai-theater-tag.tag-shelter {
+  background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+  color: white;
+}
+
+.youkai-theater-tag.tag-monument {
+  background: linear-gradient(135deg, #e65100 0%, #ff9800 100%);
+  color: white;
+}
+
+.youkai-theater-textbox.tag-shelter {
+  border-color: rgba(66, 165, 245, 0.6);
+  background: linear-gradient(180deg, rgba(13, 31, 56, 0.95) 0%, rgba(10, 10, 30, 0.98) 100%);
+}
+
+.youkai-theater-textbox.tag-shelter .youkai-theater-text {
+  color: #bbdefb;
+}
+
+.youkai-theater-textbox.tag-monument {
+  border-color: rgba(255, 152, 0, 0.6);
+  background: linear-gradient(180deg, rgba(56, 30, 10, 0.95) 0%, rgba(30, 15, 5, 0.98) 100%);
+}
+
+.youkai-theater-textbox.tag-monument .youkai-theater-text {
+  color: #ffe0b2;
+}
+
+/* フッター */
+.youkai-theater-footer {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.youkai-theater-counter {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  font-variant-numeric: tabular-nums;
+}
+
+.youkai-theater-next {
+  font-size: 12px;
+  color: rgba(255, 215, 0, 0.8);
+  animation: theater-next-pulse 1.5s ease-in-out infinite;
+  text-align: right;
+}
+
+@keyframes theater-next-pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* 音声コントロール */
+.youkai-theater-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.youkai-theater-replay-btn,
+.youkai-theater-tts-toggle {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  padding: 0;
+  line-height: 1;
+}
+
+.youkai-theater-replay-btn:hover,
+.youkai-theater-tts-toggle:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.youkai-theater-replay-btn:active,
+.youkai-theater-tts-toggle:active {
+  transform: scale(0.9);
+}
+
+.youkai-theater-replay-btn.playing {
+  animation: theater-audio-pulse 0.8s ease-in-out infinite;
+}
+
+.youkai-theater-tts-toggle.muted {
+  opacity: 0.5;
+}
+
+@keyframes theater-audio-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.youkai-theater-loading {
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  animation: theater-loading-blink 1.2s ease-in-out infinite;
+}
+
+@keyframes theater-loading-blink {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* レスポンシブ: タブレット */
+@media (max-width: 768px) {
+  .youkai-theater {
+    max-height: 480px;
+    margin: 12px;
+  }
+
+  .youkai-theater-char-img {
+    width: 96px;
+    height: 96px;
+  }
+
+  .youkai-theater-char-emoji {
+    font-size: 52px;
+  }
+}
+
+/* レスポンシブ: スマホ — キャラ大きく表示 + テキスト下部 */
+@media (max-width: 480px) {
+  .youkai-theater {
+    max-height: none;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .youkai-theater-stage {
+    padding: 12px 0 0;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  /* スマホ: 話者以外を非表示、話者を大きく中央表示 */
+  .youkai-theater-character.silent {
+    display: none;
+  }
+
+  .youkai-theater-character.speaking {
+    transform: none;
+    gap: 6px;
+  }
+
+  .youkai-theater-char-img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .youkai-theater-char-emoji {
+    font-size: 80px;
+  }
+
+  .youkai-theater-char-name {
+    font-size: 13px;
+  }
+
+  /* テキストボックス: 下部固定、コンパクトに */
+  .youkai-theater-textbox {
+    border-radius: 12px 12px 0 0;
+    margin: 0;
+    padding: 14px 16px 12px;
+    min-height: auto;
+    flex: 0 0 auto;
+  }
+
+  .youkai-theater-speaker-name {
+    font-size: 15px;
+  }
+
+  .youkai-theater-text {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .youkai-theater-open-btn {
+    padding: 12px 16px;
+  }
+
+  .youkai-theater-open-char-img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .youkai-theater-open-text {
+    font-size: 14px;
+  }
+
+  .youkai-theater-replay-btn,
+  .youkai-theater-tts-toggle {
+    min-width: 40px;
+    min-height: 40px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .youkai-theater-char-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .youkai-theater-char-emoji {
+    font-size: 26px;
+  }
+
+  .youkai-theater-char-name {
+    font-size: 8px;
+  }
+
+  .youkai-theater-textbox {
+    min-height: 120px;
+  }
+
+  .youkai-theater-text {
+    font-size: 13px;
+  }
+}
+
+/* ゆっくり劇場 ダークモード対応（既にダークなのでライトモード時の開くボタンのみ） */
+@media (prefers-color-scheme: dark) {
+  .youkai-theater-open-btn {
+    background: linear-gradient(135deg, #1b3e1f 0%, #2e5732 100%);
+    border-color: #4caf50;
+  }
+
+  .youkai-theater-open-text {
+    color: #81c784;
+  }
+}
+
+/* カスタムマーカー */
+.custom-marker {
+  background: transparent;
+  border: none;
+}
+
+.marker-pin {
+  font-size: 30px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* レスポンシブ - タブレット */
+@media (max-width: 768px) {
+  .main {
+    padding: 16px;
+  }
+
+  section {
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+
+  .youkai-intro {
+    gap: 8px;
+  }
+
+  .youkai-intro-img {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* レスポンシブ - スマートフォン */
+@media (max-width: 480px) {
+  .header {
+    padding: 16px 12px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .header h1 {
+    font-size: 18px;
+    gap: 8px;
+  }
+
+  .header-emoji {
+    font-size: 24px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  .main {
+    padding: 12px 8px;
+  }
+
+  section {
+    padding: 14px 12px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .section-header h2 {
+    font-size: 16px;
+  }
+
+  .location-info {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+
+  /* マップセクション */
+  .map-section {
+    padding: 12px 8px;
+  }
+
+  .map-container {
+    height: 300px !important;
+    border-radius: 8px !important;
+  }
+
+  /* クリックモード（モバイル） */
+  .click-mode-indicator {
+    padding: 10px 16px;
+    font-size: 13px;
+    border-radius: 20px;
+  }
+
+  .click-icon {
+    font-size: 18px;
+  }
+
+  /* 妖怪登場（モバイル） */
+  .appearance-youkai-row {
+    gap: 20px;
+  }
+
+  .appearance-emoji {
+    font-size: 48px;
+  }
+
+  .appearance-youkai-img {
+    width: 72px;
+    height: 72px;
+  }
+
+  .appearance-name {
+    font-size: 14px;
+  }
+
+  .appearance-message {
+    font-size: 16px;
+    padding: 0 16px;
+  }
+
+  .risk-youkai-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .conversation-youkai-img {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* 違う場所を調べる（モバイル） */
+  .search-another-btn {
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+
+  /* タイルエラー（モバイル） */
+  .tile-error-alert {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  /* 地図比較コントロール（モバイル） */
+  .map-compare-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .layer-selectors {
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .layer-select {
+    width: 100%;
+  }
+
+  .layer-select select {
+    flex: 1;
+    width: 100%;
+  }
+
+  .slider-handle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .layer-indicator {
+    font-size: 10px;
+    padding: 3px 6px;
+    bottom: 30px;
+  }
+
+  /* Leafletレイヤーコントロール（モバイル） */
+  .leaflet-control-layers {
+    max-width: 200px;
+  }
+
+  .leaflet-control-layers-expanded {
+    max-height: 250px;
+    overflow-y: auto;
+  }
+
+  .leaflet-control-layers-base label {
+    font-size: 12px;
+    padding: 6px 0;
+    min-height: 36px;
+  }
+
+  /* イントロセクション */
+  .intro-content {
+    padding: 16px 8px;
+  }
+
+  .youkai-intro {
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .youkai-intro-img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .youkai-item-img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .intro-content h3 {
+    font-size: 18px;
+  }
+
+  .intro-content p {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  .youkai-list {
+    gap: 8px;
+  }
+
+  .youkai-item {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  /* リスク評価カード */
+  .risk-score-card h3 {
+    font-size: 16px;
+  }
+
+  .risk-score-card .risks {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .risk-score-card .risk-item {
+    padding: 10px 8px;
+  }
+
+  .risk-item-summary {
+    min-width: 60px;
+  }
+
+  .risk-name {
+    font-size: 12px;
+  }
+
+  .risk-level {
+    font-size: 14px;
+  }
+
+  .risk-score {
+    font-size: 11px;
+  }
+
+  .risk-youkai-img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .risk-emoji-text {
+    font-size: 24px;
+  }
+
+  /* 展開時はフル幅で縦並び */
+  .risk-item.expanded .risk-item-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .risk-item.expanded .risk-item-summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+    min-width: unset;
+  }
+
+  .risk-item.expanded .risk-item-details {
+    border-left: none;
+    border-top: 2px solid #999;
+    padding-left: 0;
+    padding-top: 10px;
+    margin-top: 4px;
+  }
+
+  /* 会話セクション */
+  .youkai-conversation h3 {
+    font-size: 16px;
+  }
+
+  .youkai-conversation .message {
+    padding: 12px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .youkai-conversation .speaker span:first-child {
+    font-size: 20px !important;
+  }
+
+  .youkai-conversation .text {
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+  }
+
+  /* 隠れリスクセクション */
+  .hidden-risk-section {
+    padding: 12px 10px;
+  }
+
+  .hidden-risk-display h3 {
+    font-size: 15px !important;
+  }
+
+  .hidden-risk-display > div > div {
+    padding: 12px !important;
+  }
+
+  /* アクションリスト */
+  .action-list h3 {
+    font-size: 16px;
+  }
+
+  .action-list li {
+    padding: 10px 12px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+
+  .action-list li > span:first-child {
+    font-size: 1em !important;
+  }
+
+  /* フッター */
+  .footer {
+    padding: 12px 8px;
+    font-size: 10px;
+  }
+
+  .footer p {
+    line-height: 1.5;
+  }
+}
+
+/* 超小型スマートフォン */
+@media (max-width: 360px) {
+  .header h1 {
+    font-size: 16px;
+  }
+
+  .youkai-intro-img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .youkai-item {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+
+  .youkai-item-img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .risk-score-card .risks {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .risk-item-summary {
+    min-width: unset;
+  }
+
+  .risk-name {
+    font-size: 11px;
+  }
+
+  .risk-level {
+    font-size: 13px;
+  }
+}
+
+/* タッチデバイス向けの改善 */
+@media (hover: none) and (pointer: coarse) {
+  /* タップターゲットを大きく */
+  .youkai-item,
+  .location-info {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* リスクカードのタップフィードバック */
+  .risk-item:active {
+    transform: scale(0.97);
+    transition: transform 0.1s;
+  }
+
+  /* hover効果を無効化（タッチではちらつく） */
+  .risk-score-card .risk-item:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* 妖怪豆知識ドットのタップ領域 */
+  .youkai-trivia-dot {
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  /* 劇場テキストボックスのタップフィードバック */
+  .youkai-theater-textbox:active {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* スクロールのスムーズ化 */
+  .main {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* アクティブ状態のフィードバック */
+  section:active {
+    transform: scale(0.99);
+    transition: transform 0.1s;
+  }
+}
+
+/* ランドスケープモード（横向き） */
+@media (max-height: 500px) and (orientation: landscape) {
+  .header {
+    padding: 8px 12px;
+  }
+
+  .header h1 {
+    font-size: 18px;
+  }
+
+  .subtitle {
+    display: none;
+  }
+
+  .main {
+    padding: 8px;
+  }
+
+  section {
+    padding: 12px;
+    margin-bottom: 8px;
+  }
+
+  .map-container {
+    height: 250px !important;
+  }
+
+  .risk-score-card .risks {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 歴史的土地分析セクション */
+.historical-land-analysis {
+  background: linear-gradient(135deg, #f8f4e8 0%, #e8e4d8 100%);
+  padding: 20px;
+  border-radius: 16px;
+  border: 2px solid #d4c4a8;
+}
+
+.historical-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  color: #5d4e37;
+  margin-bottom: 16px;
+}
+
+.historical-icon {
+  font-size: 24px;
+}
+
+.terrain-badge {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #d4c4a8;
+}
+
+.terrain-label {
+  font-size: 13px;
+  color: #888;
+}
+
+.terrain-type {
+  font-size: 16px;
+  font-weight: bold;
+  color: #5d4e37;
+}
+
+.era-badge {
+  font-size: 11px;
+  padding: 4px 10px;
+  background: #8b7355;
+  color: white;
+  border-radius: 20px;
+}
+
+.historical-summary {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 4px solid #8b7355;
+  margin-bottom: 16px;
+  line-height: 1.8;
+  font-size: 14px;
+  color: #444;
+}
+
+.historical-summary p {
+  margin: 0 0 8px 0;
+}
+
+.historical-summary p:last-child {
+  margin-bottom: 0;
+}
+
+.historical-findings {
+  margin-top: 20px;
+}
+
+.findings-header {
+  font-size: 14px;
+  color: #5d4e37;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #d4c4a8;
+}
+
+.historical-finding-card {
+  background: white;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #e8e4d8;
+  overflow: hidden;
+}
+
+.historical-finding-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.finding-header {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  gap: 12px;
+}
+
+.finding-icon {
+  font-size: 24px;
+}
+
+.finding-title-area {
+  flex: 1;
+}
+
+.finding-category {
+  font-size: 11px;
+  color: #888;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.finding-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.finding-expand-icon {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.finding-details {
+  padding: 0 16px 16px;
+  border-top: 1px solid #f0f0f0;
+  background: #fafafa;
+}
+
+.finding-description {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.7;
+  margin: 14px 0;
+}
+
+.finding-implication {
+  background: #fff8e1;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.finding-implication strong {
+  display: block;
+  font-size: 12px;
+  color: #f57c00;
+  margin-bottom: 6px;
+}
+
+.finding-implication p {
+  font-size: 13px;
+  color: #5d4037;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.finding-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #999;
+}
+
+.finding-confidence {
+  background: #e8f5e9;
+  padding: 2px 8px;
+  border-radius: 10px;
+  color: #388e3c;
+}
+
+.recommended-map-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px;
+  margin-top: 16px;
+  background: linear-gradient(135deg, #8b7355 0%, #6d5a45 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.recommended-map-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(139, 115, 85, 0.3);
+}
+
+/* モバイル向け歴史分析セクション */
+@media (max-width: 600px) {
+  .historical-land-analysis {
+    padding: 16px 12px;
+  }
+
+  .historical-title {
+    font-size: 16px;
+  }
+
+  .terrain-badge {
+    padding: 10px 12px;
+  }
+
+  .terrain-type {
+    font-size: 14px;
+  }
+
+  .historical-summary {
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  .finding-header {
+    padding: 12px;
+  }
+
+  .finding-title {
+    font-size: 13px;
+  }
+
+  .finding-details {
+    padding: 0 12px 12px;
+  }
+
+  .finding-description {
+    font-size: 12px;
+  }
+}
+
+/* ダークモードサポート */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a2e;
+    color: #eee;
+  }
+
+  section {
+    background: #16213e;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .header {
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+  }
+
+  .footer {
+    background: #0f0f23;
+  }
+
+  .risk-name {
+    color: #eee;
+  }
+
+  .risk-score {
+    color: #aaa;
+  }
+
+  .risk-item-details-title {
+    color: #eee;
+  }
+
+  .risk-item-details-list {
+    color: #ccc;
+  }
+
+  .risk-item-hint {
+    color: #aaa;
+  }
+}
+
+/* ========================================
+   ローディング体験コンポーネント
+   ======================================== */
+
+.loading-experience {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 妖怪会議イラスト */
+.loading-experience-hero {
+  text-align: center;
+}
+
+.loading-experience-hero-img {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* プログレスバー */
+.loading-experience-progress {
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-experience-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+  background-size: 200% 100%;
+  animation: progress-slide 2s ease-in-out infinite;
+  border-radius: 2px;
+}
+
+@keyframes progress-slide {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ステータス */
+.loading-experience-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.loading-experience-message {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+}
+
+.loading-experience-timer {
+  font-size: 13px;
+  color: #999;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* タブ */
+.loading-experience-tabs {
+  display: flex;
+  gap: 4px;
+  background: #f0f0f0;
+  padding: 4px;
+  border-radius: 12px;
+}
+
+.loading-experience-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #666;
+}
+
+.loading-experience-tab:hover {
+  background: rgba(255, 255, 255, 0.5);
+  color: #333;
+}
+
+.loading-experience-tab.active {
+  background: white;
+  color: #333;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* コンテンツエリア */
+.loading-experience-content {
+  min-height: 260px;
+}
+
+/* 古地図ミニマップ */
+.historical-map-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.historical-map-mini-container {
+  width: 100%;
+  height: 250px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+}
+
+.historical-map-mini-status {
+  font-size: 13px;
+  color: #888;
+  text-align: center;
+  margin: 0;
+}
+
+.historical-map-mini-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.historical-map-mini-label {
+  font-size: 13px;
+  color: #5d4e37;
+  font-weight: 500;
+}
+
+.historical-map-mini-toggle {
+  padding: 6px 14px;
+  border: 1px solid #d4c4a8;
+  background: #f8f4e8;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #5d4e37;
+  transition: all 0.2s;
+}
+
+.historical-map-mini-toggle:hover {
+  background: #ede8d8;
+}
+
+/* 防災クイズ */
+.disaster-quiz {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.disaster-quiz-score {
+  text-align: right;
+  font-size: 13px;
+  font-weight: 600;
+  color: #667eea;
+}
+
+.disaster-quiz-category {
+  display: inline-block;
+  padding: 3px 10px;
+  background: #e8f0fe;
+  color: #1a73e8;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+.disaster-quiz-question {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.disaster-quiz-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.disaster-quiz-choice {
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  color: #333;
+}
+
+.disaster-quiz-choice:hover:not(:disabled) {
+  border-color: #667eea;
+  background: #f8f9ff;
+}
+
+.disaster-quiz-choice:disabled {
+  cursor: default;
+}
+
+.disaster-quiz-choice.correct {
+  border-color: #4caf50;
+  background: #e8f5e9;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.disaster-quiz-choice.incorrect {
+  border-color: #f44336;
+  background: #ffebee;
+  color: #c62828;
+}
+
+.disaster-quiz-explanation {
+  background: #f5f7fa;
+  padding: 14px;
+  border-radius: 10px;
+  border-left: 4px solid #667eea;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.disaster-quiz-result {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.disaster-quiz-explanation p {
+  margin: 0;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* 妖怪トリビア */
+.youkai-trivia {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.youkai-trivia-card {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.youkai-trivia-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.youkai-trivia-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.youkai-trivia-emoji {
+  font-size: 40px;
+}
+
+.youkai-trivia-image {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.youkai-trivia-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.youkai-trivia-domain {
+  font-size: 12px;
+  color: #888;
+}
+
+.youkai-trivia-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.youkai-trivia-list li {
+  padding: 8px 12px;
+  background: #f5f7fa;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #444;
+  line-height: 1.6;
+}
+
+.youkai-trivia-list li::before {
+  content: '・';
+  color: #667eea;
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+.youkai-trivia-funfact {
+  background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%);
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ffe082;
+  margin-top: 4px;
+}
+
+.youkai-trivia-funfact strong {
+  display: block;
+  font-size: 12px;
+  color: #f57c00;
+  margin-bottom: 4px;
+}
+
+.youkai-trivia-funfact p {
+  margin: 0;
+  font-size: 13px;
+  color: #5d4037;
+  line-height: 1.6;
+}
+
+/* 左右ナビゲーション */
+.youkai-trivia-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.youkai-trivia-nav .youkai-trivia-card {
+  flex: 1;
+  min-width: 0;
+}
+
+.youkai-trivia-nav-btn {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 22px;
+  line-height: 1;
+  color: #667eea;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.youkai-trivia-nav-btn:hover {
+  background: #f0f0ff;
+  box-shadow: 0 1px 4px rgba(102, 126, 234, 0.3);
+}
+
+.youkai-trivia-nav-btn:active {
+  background: #e0e0ff;
+}
+
+/* ドットインジケーター（妖怪アイコン） */
+.youkai-trivia-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.youkai-trivia-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: #f0f0f0;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.youkai-trivia-dot:hover {
+  border-color: #b0b8e8;
+  background: #e8ebff;
+}
+
+.youkai-trivia-dot.active {
+  border-color: #667eea;
+  background: #e8ebff;
+  transform: scale(1.15);
+  box-shadow: 0 1px 6px rgba(102, 126, 234, 0.4);
+}
+
+.youkai-trivia-dot-img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.youkai-trivia-dot-emoji {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* ========================================
+   ローディング体験 - レスポンシブ
+   ======================================== */
+
+@media (max-width: 768px) {
+  .loading-experience-content {
+    min-height: 220px;
+  }
+
+  .historical-map-mini-container {
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loading-experience-status {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .loading-experience-message {
+    font-size: 13px;
+  }
+
+  .loading-experience-tab {
+    padding: 8px 8px;
+    font-size: 12px;
+    gap: 4px;
+  }
+
+  .loading-experience-content {
+    min-height: 200px;
+  }
+
+  .historical-map-mini-container {
+    height: 180px;
+  }
+
+  .disaster-quiz-question {
+    font-size: 14px;
+  }
+
+  .disaster-quiz-choice {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .youkai-trivia-emoji {
+    font-size: 32px;
+  }
+
+  .youkai-trivia-image {
+    width: 56px;
+    height: 56px;
+  }
+
+  .youkai-trivia-name {
+    font-size: 16px;
+  }
+
+  .youkai-trivia-nav-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+  }
+
+  .youkai-trivia-dot {
+    width: 30px;
+    height: 30px;
+  }
+
+  .youkai-trivia-dot-img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .youkai-trivia-dot-emoji {
+    font-size: 14px;
+  }
+
+  .loading-experience-hero-img {
+    max-height: 150px;
+  }
+}
+
+@media (max-width: 360px) {
+  .loading-experience-tab {
+    padding: 8px 6px;
+    font-size: 11px;
+  }
+
+  .historical-map-mini-container {
+    height: 160px;
+  }
+
+  .disaster-quiz-choice {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
+
+/* ローディング体験 - ダークモード */
+@media (prefers-color-scheme: dark) {
+  .loading-experience-progress {
+    background: #333;
+  }
+
+  .loading-experience-message {
+    color: #ccc;
+  }
+
+  .loading-experience-tabs {
+    background: #2d3748;
+  }
+
+  .loading-experience-tab {
+    color: #aaa;
+  }
+
+  .loading-experience-tab:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ddd;
+  }
+
+  .loading-experience-tab.active {
+    background: #16213e;
+    color: #eee;
+  }
+
+  .historical-map-mini-container {
+    border-color: #444;
+  }
+
+  .historical-map-mini-label {
+    color: #c8b896;
+  }
+
+  .historical-map-mini-toggle {
+    background: #2d3748;
+    border-color: #555;
+    color: #ccc;
+  }
+
+  .disaster-quiz-category {
+    background: #1e3a5f;
+    color: #8ab4f8;
+  }
+
+  .disaster-quiz-question {
+    color: #eee;
+  }
+
+  .disaster-quiz-choice {
+    background: #16213e;
+    border-color: #444;
+    color: #ddd;
+  }
+
+  .disaster-quiz-choice:hover:not(:disabled) {
+    border-color: #667eea;
+    background: #1e2a4a;
+  }
+
+  .disaster-quiz-choice.correct {
+    background: #1b3e1f;
+    border-color: #4caf50;
+    color: #81c784;
+  }
+
+  .disaster-quiz-choice.incorrect {
+    background: #3e1b1b;
+    border-color: #f44336;
+    color: #ef9a9a;
+  }
+
+  .disaster-quiz-explanation {
+    background: #1e2a3a;
+  }
+
+  .disaster-quiz-explanation p {
+    color: #bbb;
+  }
+
+  .youkai-trivia-name {
+    color: #eee;
+  }
+
+  .youkai-trivia-list li {
+    background: #1e2a3a;
+    color: #ccc;
+  }
+
+  .youkai-trivia-funfact {
+    background: linear-gradient(135deg, #2d2810 0%, #3d3520 100%);
+    border-color: #5d4e37;
+  }
+
+  .youkai-trivia-funfact p {
+    color: #c8b896;
+  }
+
+  .youkai-trivia-dot {
+    background: #333;
+    border-color: transparent;
+  }
+
+  .youkai-trivia-dot:hover {
+    border-color: #667eea;
+    background: #2a2d4a;
+  }
+
+  .youkai-trivia-dot.active {
+    background: #2a2d4a;
+    border-color: #667eea;
+  }
+
+  .youkai-trivia-nav-btn {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #90a0d0;
+  }
+
+  .youkai-trivia-nav-btn:hover {
+    background: #3a4a5c;
+  }
+}
+
+
+/* ========================================
+   近傍情報（避難所・伝承碑）
+   ======================================== */
+
+.nearby-info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.nearby-info-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.nearby-info-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.nearby-info-icon {
+  font-size: 24px;
+}
+
+.nearby-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nearby-info-card {
+  border-radius: 10px;
+  padding: 14px 16px;
+  transition: box-shadow 0.2s;
+}
+
+.nearby-info-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.shelter-card {
+  background: #e3f2fd;
+  border: 1px solid #90caf9;
+}
+
+.monument-card {
+  background: #fff8e1;
+  border: 1px solid #ffcc02;
+}
+
+.monument-trivia {
+  background: #fffde7;
+  border: 1px solid #ffe082;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: #5d4037;
+  line-height: 1.6;
+}
+
+.monument-trivia ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.monument-trivia li {
+  margin-bottom: 2px;
+}
+
+.nearby-info-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.nearby-info-card-name {
+  font-weight: bold;
+  font-size: 15px;
+  color: #222;
+}
+
+.nearby-info-card-distance {
+  font-size: 13px;
+  color: #666;
+  white-space: nowrap;
+  margin-left: 12px;
+  background: rgba(0, 0, 0, 0.06);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.nearby-info-card-address {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.nearby-info-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.nearby-info-card-disaster {
+  font-size: 13px;
+  color: #666;
+}
+
+.nearby-info-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.nearby-info-tag {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.shelter-tag {
+  background: #bbdefb;
+  color: #1565c0;
+}
+
+.monument-tag {
+  background: #ffe082;
+  color: #e65100;
+}
+
+.nearby-info-card-description {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.6;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+/* レスポンシブ */
+@media (max-width: 480px) {
+  .nearby-info-section {
+    padding: 14px;
+  }
+
+  .nearby-info-title {
+    font-size: 16px;
+  }
+
+  .nearby-info-card {
+    padding: 12px;
+  }
+
+  .nearby-info-card-name {
+    font-size: 14px;
+  }
+}
+
+/* ダークモード */
+@media (prefers-color-scheme: dark) {
+  .nearby-info-section {
+    background: #1e1e1e;
+  }
+
+  .nearby-info-title {
+    color: #e0e0e0;
+  }
+
+  .shelter-card {
+    background: #1a2a3a;
+    border-color: #2a4a6a;
+  }
+
+  .monument-card {
+    background: #2a2510;
+    border-color: #5a4a10;
+  }
+
+  .nearby-info-card-name {
+    color: #e0e0e0;
+  }
+
+  .nearby-info-card-distance {
+    color: #aaa;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .nearby-info-card-address,
+  .nearby-info-card-disaster,
+  .nearby-info-card-description {
+    color: #aaa;
+  }
+
+  .shelter-tag {
+    background: #1a3a5a;
+    color: #90caf9;
+  }
+
+  .monument-tag {
+    background: #3a2a00;
+    color: #ffc107;
+  }
+}

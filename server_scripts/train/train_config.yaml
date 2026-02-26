@@ -1,0 +1,54 @@
+# QLoRA学習設定 - Qwen2.5-14B-Instruct
+# 妖怪ハザードマップ + 避難案内AI 統合学習
+
+# モデル設定
+model:
+  name_or_path: "/home/user/youkai-hazard/models/base/Qwen2.5-14B-Instruct"
+  use_flash_attn: false  # flash_attn未インストールのためfalse
+
+# LoRA設定
+lora:
+  r: 64
+  alpha: 128
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+  dropout: 0.05
+
+# データ設定
+data:
+  train_file: "/home/user/youkai-hazard/data/cleaned/train.jsonl"
+  val_file: "/home/user/youkai-hazard/data/cleaned/val.jsonl"
+  test_file: "/home/user/youkai-hazard/data/cleaned/test.jsonl"
+
+# 学習パラメータ
+training:
+  output_dir: "/home/user/youkai-hazard/models/qlora_output"
+  epochs: 3
+  max_seq_length: 4096
+
+  batch_size: 1
+  gradient_accumulation: 5
+
+  learning_rate: 0.0002  # 2e-4
+  warmup_ratio: 0.03
+  weight_decay: 0.01
+  max_grad_norm: 1.0
+
+  # 評価・保存
+  logging_steps: 10
+  eval_steps: 500
+  save_steps: 500
+  save_total_limit: 3
+
+  # ワーカー
+  num_workers: 4
+
+  # 実験管理（wandb使う場合は "wandb" に変更）
+  report_to: "none"
+  run_name: "youkai-hazard-qlora-v1"
